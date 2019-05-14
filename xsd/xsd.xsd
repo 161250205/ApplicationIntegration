@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://jw.nju.edu.cn/schema/info"
+        xmlns:tns="http://jw.nju.edu.cn/schema/info"
+        elementFormDefault="qualified">
+
+    <element name="infoList" type="tns:infoListType"/>
+
+    <!--单个航班信息类型-->
+    <complexType name="infoType">
+        <all>
+            <element name="company" type="tns:airlineCompanyType"/>
+            <element name="flightNumber" type="tns:flightNumberType"/>
+            <element name="departureAirport" type="tns:airportNameType"/>
+            <element name="arrivalAirport" type="tns:airportNameType"/>
+            <element name="departureTime" type="tns:hourMinutes"/>
+            <element name="arrivalTime" type="tns:hourMinutes"/>
+            <element name="price" type="tns:flightPriceType"/>
+        </all>
+    </complexType>
+
+    <!--航班信息列表类型, 以携程途牛去哪儿平台为单位-->
+    <complexType name="infoListType">
+        <sequence minOccurs="0" maxOccurs="unbounded">
+            <element name="info" type="tns:infoType"/>
+        </sequence>
+        <attribute name="company" type="tns:platformCompanyType"/>
+    </complexType>
+
+    <!--平台, 枚举-->
+    <simpleType name="platformCompanyType">
+        <restriction base="string">
+            <enumeration value="携程"/>
+            <enumeration value="途牛"/>
+            <enumeration value="去哪儿"/>
+        </restriction>
+    </simpleType>
+
+    <!--航空公司, 自由字符串-->
+    <simpleType name="airlineCompanyType">
+        <restriction base="string">
+            <!--<enumeration value="东方航空"/>-->
+            <!--<enumeration value="厦门航空"/>-->
+            <!--<enumeration value="海南航空"/>-->
+            <!--<enumeration value="中国国航"/>-->
+            <!--<enumeration value="上海航空"/>-->
+            <!--<enumeration value="中国联航"/>-->
+            <!--<enumeration value="金鹏航空"/>-->
+        </restriction>
+    </simpleType>
+
+    <!--航班号, 机号, 字母数字限定-->
+    <simpleType name="flightNumberType">
+        <restriction base="string">
+            <pattern value="[a-zA-Z0-9]*"/>
+        </restriction>
+    </simpleType>
+
+    <!--机场名字, 暂时不设限定-->
+    <simpleType name="airportNameType">
+        <restriction base="string"/>
+    </simpleType>
+
+    <!--航班价格, 正整数-->
+    <simpleType name="flightPriceType">
+        <restriction base="int">
+            <minInclusive value="0"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="hourMinutes">
+        <restriction base="string">
+            <pattern value="[0-9]{2}:[0-9]{2}"/>
+        </restriction>
+    </simpleType>
+</schema>
