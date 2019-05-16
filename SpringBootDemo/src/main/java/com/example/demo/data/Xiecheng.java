@@ -30,8 +30,12 @@ import java.io.IOException;
 @Service
 public class Xiecheng implements ApplicationRunner {
 
+    private final ResourceLoader resourceLoader;
+
     @Autowired
-    private ResourceLoader resourceLoader;
+    public Xiecheng(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {

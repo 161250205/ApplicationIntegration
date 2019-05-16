@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,5 +15,8 @@ public class AirLineData {
     private String arrivalAirport;
     private String departureTime;
     private String arrivalTime;
-    private List<String> price = new ArrayList<>(3);//顺序为去哪儿，途牛，携程
+
+    private String qPrice;
+    private String tPrice;
+    private String xPrice;
 }
