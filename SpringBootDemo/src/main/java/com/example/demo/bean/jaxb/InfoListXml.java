@@ -24,7 +24,7 @@ public class InfoListXml implements Serializable {
     private List<InfoXml> infos;
 
     @XmlAttribute(name = "company", namespace = "http://jw.nju.edu.cn/schema/info")
-    private String company;
+    private String company;//平台？
 
     @XmlTransient
     public List<InfoXml> getInfos() {
