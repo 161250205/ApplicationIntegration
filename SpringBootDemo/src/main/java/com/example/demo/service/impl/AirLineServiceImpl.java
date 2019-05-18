@@ -58,7 +58,7 @@ public class AirLineServiceImpl implements AirLineService {
         }
     }
 
-    public void transfer(AirLineData airLineData,InfoXml infoXml){
+    private void transfer(AirLineData airLineData,InfoXml infoXml){
         Class ac = airLineData.getClass();
         Class ic = infoXml.getClass();
         Field[] ifields = ic.getDeclaredFields();

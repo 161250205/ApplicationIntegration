@@ -11,7 +11,7 @@ public class TransferTest {
         AirLineServiceImpl airLineService = new AirLineServiceImpl();
         AirLineData airLineData = new AirLineData();
         InfoXml infoXml = new InfoXml("company1","flightNum1","departPort1","arrivalPort1","departureTime1","arrivalTime1",100);
-        airLineService.transfer(airLineData,infoXml);
+//        airLineService.transfer(airLineData,infoXml);
         System.out.println(airLineData.toString());
     }
 
