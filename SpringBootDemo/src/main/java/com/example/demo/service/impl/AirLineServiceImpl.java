@@ -67,13 +67,12 @@ public class AirLineServiceImpl implements AirLineService {
             String fname = field.getName();
             if(!fname.equals("price")){
                 char c = fname.charAt(0);
-                if(c<'z'&&c>'a'){
+                if(c<='z'&&c>='a'){
                     c = (char)(c-32);
                     fname = c+fname.substring(1);
                 }
-
                 try {
-                    ac.getDeclaredMethod("set"+fname).invoke(airLineData,
+                    ac.getDeclaredMethod("set"+fname,String.class).invoke(airLineData,
                             (String)(ic.getDeclaredMethod("get"+fname).invoke(infoXml)));
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
