@@ -17,14 +17,14 @@ import java.util.List;
 @XmlAccessorOrder(XmlAccessOrder.ALPHABETICAL)
 @XmlType(name = "infoListType",
         namespace = "http://jw.nju.edu.cn/schema/info",
-        propOrder = {"infos"})
+        propOrder = {"infos", "company"})
 public class InfoListXml implements Serializable {
 
     @XmlElement(name = "info", namespace = "http://jw.nju.edu.cn/schema/info")
     private List<InfoXml> infos;
 
-    @XmlAttribute(name = "company", namespace = "http://jw.nju.edu.cn/schema/info")
-    private String company;//平台？
+    @XmlAttribute(name = "company")
+    private String company;
 
     @XmlTransient
     public List<InfoXml> getInfos() {
