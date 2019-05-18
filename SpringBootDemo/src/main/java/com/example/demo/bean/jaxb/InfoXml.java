@@ -1,8 +1,6 @@
 package com.example.demo.bean.jaxb;
 
-import lombok.Data;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -11,6 +9,8 @@ import java.io.Serializable;
  * @author Shuaiyu Yao
  * @create 2019-05-16 16:22
  */
+@AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @ToString
 @XmlRootElement(name = "info", namespace = "http://jw.nju.edu.cn/schema/info")

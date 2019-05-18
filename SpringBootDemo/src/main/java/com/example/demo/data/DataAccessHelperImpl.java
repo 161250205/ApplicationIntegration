@@ -44,10 +44,10 @@ public class DataAccessHelperImpl implements DataAccessHelper {
             InfoListXml qxml = convertToJavaBean(InfoListXml.class, qunarFile);
             InfoListXml txml = convertToJavaBean(InfoListXml.class, tuniuFile);
 
-            return new ArrayList<>(Arrays.asList(xxml, qxml, txml));
+            return new ArrayList<InfoListXml>(Arrays.asList(xxml, qxml, txml));
         } catch (IOException e) {
             e.printStackTrace();
-            return new ArrayList<>();
+            return new ArrayList<InfoListXml>();
         }
     }
 
