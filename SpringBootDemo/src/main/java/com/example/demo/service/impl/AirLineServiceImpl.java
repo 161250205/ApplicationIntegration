@@ -1,17 +1,20 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.bean.AirLineData;
-import com.example.demo.bean.jaxb.InfoListXml;
-import com.example.demo.bean.jaxb.InfoXml;
+import com.example.demo.bean.InfoType;
+import com.example.demo.client.tuniu.TuniuImplPortImpl;
+import com.example.demo.client.tuniu.TuniuImplPortImplService;
+import com.example.demo.client.xiecheng.XiechengImplPortImpl;
+import com.example.demo.client.xiecheng.XiechengImplPortImplService;
 import com.example.demo.data.DataAccessHelper;
 import com.example.demo.service.AirLineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.xml.namespace.QName;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,30 +24,47 @@ import java.util.Map;
 public class AirLineServiceImpl implements AirLineService {
     @Autowired
     DataAccessHelper dataAccessHelper;
+    private static final QName tSERVICE_NAME = new QName("http://com/", "TuniuImplPortImplService");
+    private static final QName xSERVICE_NAME = new QName("http://a.other.com/", "XiechengImplPortImplService");
     public List<AirLineData> getAirTickets(){
-        List<InfoListXml> listXmls = dataAccessHelper.getAirLineData();
+        //使用客户端获取途牛信息
+        URL twsdlURL = TuniuImplPortImplService.WSDL_LOCATION;
+        TuniuImplPortImplService tss = new TuniuImplPortImplService(twsdlURL, tSERVICE_NAME);
+        TuniuImplPortImpl tport = tss.getTuniuImplPortImplPort();
+        //使用客户端获取携程呢信息
+        URL xwsdlURL = XiechengImplPortImplService.WSDL_LOCATION;
+        XiechengImplPortImplService xss = new XiechengImplPortImplService(xwsdlURL, xSERVICE_NAME);
+        XiechengImplPortImpl xport = xss.getXiechengImplPortImplPort();
+
+        List<InfoType> xs = xport.getXiechengData().getInfo();//携程信息
+        List<InfoType> ts = tport.getTuniuData().getInfo();//途牛信息
+
         Map<String,AirLineData> map = new HashMap<String, AirLineData>();//key : flightNumber
-        for(InfoListXml info:listXmls){
-            String company = info.getCompany();
-            for(InfoXml infoXml:info.getInfos()){
-                AirLineData airLineData;
-                if(map.containsKey(infoXml.getFlightNumber())){
-                    airLineData = map.get(infoXml.getFlightNumber());
-                }else{
-                    airLineData = new AirLineData();
-                    transfer(airLineData,infoXml);
-                }
-                try {
-                    setAirLineData(airLineData, company, infoXml.getPrice());
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                map.put(infoXml.getFlightNumber(),airLineData);
-            }
-        }
+        processData(ts,"途牛",map);
+        processData(xs,"携程",map);
         List<AirLineData> res = new ArrayList<AirLineData>(map.values());
         return res;
     }
+
+    private void processData(List<InfoType> s,String com,Map<String,AirLineData> map){
+        for(InfoType infoXml:s){
+            String company = com;
+            AirLineData airLineData;
+            if(map.containsKey(infoXml.getFlightNumber())){
+                airLineData = map.get(infoXml.getFlightNumber());
+            }else{
+                airLineData = new AirLineData();
+                transfer(airLineData,infoXml);
+            }
+            try {
+                setAirLineData(airLineData, company, infoXml.getPrice());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            map.put(infoXml.getFlightNumber(),airLineData);
+        }
+    }
+
     private void setAirLineData(AirLineData airLineData,String company,int price){
         String p = Integer.toString(price);
         if(company.equals("去哪儿")){
@@ -58,7 +78,7 @@ public class AirLineServiceImpl implements AirLineService {
         }
     }
 
-    private void transfer(AirLineData airLineData,InfoXml infoXml){
+    private void transfer(AirLineData airLineData,InfoType infoXml){
         Class ac = airLineData.getClass();
         Class ic = infoXml.getClass();
         Field[] ifields = ic.getDeclaredFields();
