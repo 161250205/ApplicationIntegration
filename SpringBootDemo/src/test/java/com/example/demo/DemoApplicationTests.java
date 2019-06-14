@@ -1,8 +1,9 @@
 package com.example.demo;
 
 import com.example.demo.bean.AirLineData;
-import com.example.demo.bean.Ticket;
 import com.example.demo.bean.jaxb.InfoListXml;
+import com.example.demo.client.qunar.hello.examples.spyne.Application;
+import com.example.demo.client.qunar.hello.examples.spyne.QunarService;
 import com.example.demo.dao.TicketDAO;
 import com.example.demo.data.DataAccessHelper;
 import com.example.demo.service.AirLineService;
@@ -12,7 +13,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
+import com.example.demo.client.qunar.project.Ticket;
+import javax.xml.namespace.QName;
+import java.net.URL;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -28,27 +31,34 @@ public class DemoApplicationTests {
     @Autowired
     TicketDAO ticketDAO;
 
+    private static final QName qSERVICE_NAME = new QName("spyne.examples.hello", "QunarService");
     @Test
-    @Ignore
     public void test() {
-        List<AirLineData> airLineDatas = airLineService.getAirTickets();
-        for(AirLineData airLineData:airLineDatas){
-            ticketDAO.save(getTic(airLineData));
+
+        URL qwsdlURL = QunarService.WSDL_LOCATION;
+        QunarService ss = new QunarService(qwsdlURL, qSERVICE_NAME);
+        Application qport = ss.getApplication();
+
+
+        List<Ticket> qs = qport.getTicketsData("").getTicket();
+
+        for(Ticket ticket:qs){
+            System.out.println(ticket.toString());
         }
     }
-    private Ticket getTic(AirLineData airLineData){
-        Ticket ticket = new Ticket();
-        ticket.setArrivalAirport(airLineData.getArrivalAirport());
-        ticket.setArrivalTime(airLineData.getArrivalTime());
-        ticket.setCompany(airLineData.getCompany());
-        ticket.setDepartureAirport(airLineData.getDepartureAirport());
-        ticket.setDepartureTime(airLineData.getDepartureTime());
-        ticket.setFlightNumber(airLineData.getFlightNumber());
-//        ticket.setPrice(airLineData.getQPrice());//qunar
-//        ticket.setPrice(airLineData.getTPrice());//tuniu
-        ticket.setPrice(airLineData.getXPrice());//xiecheng
-        return ticket;
-    }
+//    private Ticket getTic(AirLineData airLineData){
+//        Ticket ticket = new Ticket();
+//        ticket.setArrivalAirport(airLineData.getArrivalAirport());
+//        ticket.setArrivalTime(airLineData.getArrivalTime());
+//        ticket.setCompany(airLineData.getCompany());
+//        ticket.setDepartureAirport(airLineData.getDepartureAirport());
+//        ticket.setDepartureTime(airLineData.getDepartureTime());
+//        ticket.setFlightNumber(airLineData.getFlightNumber());
+////        ticket.setPrice(airLineData.getQPrice());//qunar
+////        ticket.setPrice(airLineData.getTPrice());//tuniu
+//        ticket.setPrice(airLineData.getXPrice());//xiecheng
+//        return ticket;
+//    }
 
     @Test
     @Ignore

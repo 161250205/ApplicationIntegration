@@ -35,7 +35,6 @@ public final class TuniuImplPortImpl_TuniuImplPortImplPort_Client {
         InfoListType _getTuniuData__return = port.getTuniuData();
         System.out.println("getTuniuData.result=" + _getTuniuData__return);
 
-
         }
 
         System.exit(0);
