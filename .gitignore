@@ -77,3 +77,10 @@
 .idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml
 .idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml
 .idea/libraries/Maven__antlr_antlr_2_7_7.xml
+.idea/libraries/Maven__org_jvnet_staxex_stax_ex_1_7_8.xml
+.idea/libraries/Maven__org_glassfish_jaxb_txw2_2_3_0.xml
+.idea/libraries/Maven__org_glassfish_jaxb_jaxb_runtime_2_3_0.xml
+.idea/libraries/Maven__org_glassfish_jaxb_jaxb_core_2_3_0.xml
+.idea/libraries/Maven__mysql_mysql_connector_java_5_1_46.xml
+.idea/libraries/Maven__com_sun_xml_fastinfoset_FastInfoset_1_2_13.xml
+.idea/libraries/Maven__com_sun_istack_istack_commons_runtime_3_0_5.xml

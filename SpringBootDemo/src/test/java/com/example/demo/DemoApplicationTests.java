@@ -43,7 +43,7 @@ public class DemoApplicationTests {
         List<Ticket> qs = qport.getTicketsData("").getTicket();
 
         for(Ticket ticket:qs){
-            System.out.println(ticket.toString());
+            System.out.println(ticket.getFlightNumber().getValue());
         }
     }
 //    private Ticket getTic(AirLineData airLineData){
