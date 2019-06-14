@@ -22,14 +22,14 @@ import java.util.List;
 @SpringBootTest
 public class DemoApplicationTests {
 
-    @Autowired
-    private DataAccessHelper dataAccessHelper;
-
-    @Autowired
-    private AirLineService airLineService;
-
-    @Autowired
-    TicketDAO ticketDAO;
+//    @Autowired
+//    private DataAccessHelper dataAccessHelper;
+//
+//    @Autowired
+//    private AirLineService airLineService;
+//
+//    @Autowired
+//    TicketDAO ticketDAO;
 
     private static final QName qSERVICE_NAME = new QName("spyne.examples.hello", "QunarService");
     @Test
@@ -60,17 +60,17 @@ public class DemoApplicationTests {
 //        return ticket;
 //    }
 
-    @Test
-    @Ignore
-    public void contextLoads() {
-        List<InfoListXml> xmlList = dataAccessHelper.getAirLineData();
-        System.out.println(xmlList);
-    }
-
-    @Test
-    @Ignore
-    public void test2(){
-        List<AirLineData> lineData=airLineService.getAirTickets();
-        System.out.println(lineData);
-    }
+//    @Test
+//    @Ignore
+//    public void contextLoads() {
+//        List<InfoListXml> xmlList = dataAccessHelper.getAirLineData();
+//        System.out.println(xmlList);
+//    }
+//
+//    @Test
+//    @Ignore
+//    public void test2(){
+//        List<AirLineData> lineData=airLineService.getAirTickets();
+//        System.out.println(lineData);
+//    }
 }
