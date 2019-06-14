@@ -29,7 +29,7 @@ import com.example.demo.client.qunar.project.TicketArray;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getTicketsDataResponse", propOrder = {
+@XmlType(name = "getTicketsDataResponseXML", propOrder = {
     "getTicketsDataResult"
 })
 public class GetTicketsDataResponse {
