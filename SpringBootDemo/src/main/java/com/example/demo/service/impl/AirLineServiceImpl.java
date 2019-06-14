@@ -11,6 +11,7 @@ import com.example.demo.client.xiecheng.XiechengImplPortImpl;
 import com.example.demo.client.xiecheng.XiechengImplPortImplService;
 import com.example.demo.data.DataAccessHelper;
 import com.example.demo.service.AirLineService;
+import com.example.demo.util.TransferUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,8 @@ import java.util.Map;
 public class AirLineServiceImpl implements AirLineService {
     @Autowired
     DataAccessHelper dataAccessHelper;
+
+    TransferUtil transfer = new TransferUtil();
     private static final QName tSERVICE_NAME = new QName("http://com/", "TuniuImplPortImplService");
     private static final QName qSERVICE_NAME = new QName("spyne.examples.hello", "QunarService");
     private static final QName xSERVICE_NAME = new QName("http://a.other.com/", "XiechengImplPortImplService");
@@ -48,11 +51,20 @@ public class AirLineServiceImpl implements AirLineService {
 
         List<InfoType> xs = xport.getXiechengData().getInfo();//携程信息
         List<InfoType> ts = tport.getTuniuData().getInfo();//途牛信息
-        List<Ticket> qs = qport.getTicketsData("").getTicket();
+        List<Ticket> qts = qport.getTicketsData("").getTicket();
+        List<InfoType> qs = new ArrayList<InfoType>();
+
+        for(Ticket ticket:qts){
+            InfoType it = new InfoType();
+            it.setArrivalAirport(ticket.getArrivalAirport().getValue());
+            transfer(it,ticket);
+            qs.add(it);
+        }
 
         Map<String,AirLineData> map = new HashMap<String, AirLineData>();//key : flightNumber
         processData(ts,"途牛",map);
         processData(xs,"携程",map);
+        processData(qs,"去哪儿",map);
         List<AirLineData> res = new ArrayList<AirLineData>(map.values());
         return res;
     }
@@ -65,7 +77,7 @@ public class AirLineServiceImpl implements AirLineService {
                 airLineData = map.get(infoXml.getFlightNumber());
             }else{
                 airLineData = new AirLineData();
-                transfer(airLineData,infoXml);
+                transfer.transfer(airLineData,infoXml);
             }
             try {
                 setAirLineData(airLineData, company, infoXml.getPrice());
@@ -88,31 +100,13 @@ public class AirLineServiceImpl implements AirLineService {
             throw new IllegalArgumentException("Wrong Company Name");
         }
     }
-
-    private void transfer(AirLineData airLineData,InfoType infoXml){
-        Class ac = airLineData.getClass();
-        Class ic = infoXml.getClass();
-        Field[] ifields = ic.getDeclaredFields();
-
-        for(Field field:ifields){
-            String fname = field.getName();
-            if(!fname.equals("price")){
-                char c = fname.charAt(0);
-                if(c<='z'&&c>='a'){
-                    c = (char)(c-32);
-                    fname = c+fname.substring(1);
-                }
-                try {
-                    ac.getDeclaredMethod("set"+fname,String.class).invoke(airLineData,
-                            (String)(ic.getDeclaredMethod("get"+fname).invoke(infoXml)));
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    private void transfer(InfoType it,Ticket ticket){
+        it.setArrivalAirport(ticket.getArrivalAirport().getValue());
+        it.setArrivalTime(ticket.getArrivalTime().getValue());
+        it.setCompany(ticket.getCompany().getValue());
+        it.setDepartureAirport(ticket.getDepartureAirport().getValue());
+        it.setDepartureTime(ticket.getDepartureTime().getValue());
+        it.setFlightNumber(ticket.getFlightNumber().getValue());
+        it.setPrice(Integer.parseInt(ticket.getPrice().getValue()));
     }
 }
