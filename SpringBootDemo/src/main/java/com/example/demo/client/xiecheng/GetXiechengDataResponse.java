@@ -28,7 +28,7 @@ import com.example.demo.bean.InfoListType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getXiechengDataResponse", propOrder = {
+@XmlType(name = "getXiechengDataResponseXML", propOrder = {
     "_return"
 })
 public class GetXiechengDataResponse {

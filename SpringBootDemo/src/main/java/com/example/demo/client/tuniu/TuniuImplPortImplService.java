@@ -15,7 +15,7 @@ import javax.xml.ws.Service;
  *
  */
 @WebServiceClient(name = "TuniuImplPortImplService",
-                  wsdlLocation = "http://localhost:8000/service/TuniuService?wsdl",
+                  wsdlLocation = "http://192.168.1.112:8000/service/TuniuService?wsdl",
                   targetNamespace = "http://com/")
 public class TuniuImplPortImplService extends Service {
 
@@ -26,7 +26,7 @@ public class TuniuImplPortImplService extends Service {
     static {
         URL url = null;
         try {
-            url = new URL("http://localhost:8000/service/TuniuService?wsdl");
+            url = new URL("http://192.168.1.112:8000/service/TuniuService?wsdl");
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(TuniuImplPortImplService.class.getName())
                 .log(java.util.logging.Level.INFO,

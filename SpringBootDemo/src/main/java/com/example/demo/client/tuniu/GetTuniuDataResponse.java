@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getTuniuDataResponse", propOrder = {
+@XmlType(name = "getTuniuDataResponseXML", propOrder = {
     "_return"
 })
 public class GetTuniuDataResponse {

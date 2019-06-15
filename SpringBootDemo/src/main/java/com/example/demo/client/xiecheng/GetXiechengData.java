@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getXiechengData")
+@XmlType(name = "getXiechengDataXML")
 public class GetXiechengData {
 
 

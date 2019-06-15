@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Ticket complex type�� Java �ࡣ
- * 
+ * <p>
  * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Ticket"&gt;
  *   &lt;complexContent&gt;
@@ -30,18 +30,16 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Ticket", propOrder = {
-    "flightNumber",
-    "company",
-    "departureTime",
-    "departureAirport",
-    "arrivalTime",
-    "arrivalAirport",
-    "price"
+        "flightNumber",
+        "company",
+        "departureTime",
+        "departureAirport",
+        "arrivalTime",
+        "arrivalAirport",
+        "price"
 })
 public class Ticket {
 
@@ -60,13 +58,24 @@ public class Ticket {
     @XmlElementRef(name = "price", namespace = "Project", type = JAXBElement.class, required = false)
     protected JAXBElement<String> price;
 
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "flightNumber=" + flightNumber.getValue() +
+                ", company=" + company.getValue() +
+                ", departureTime=" + departureTime.getValue() +
+                ", departureAirport=" + departureAirport.getValue() +
+                ", arrivalTime=" + arrivalTime.getValue() +
+                ", arrivalAirport=" + arrivalAirport.getValue() +
+                ", price=" + price.getValue() +
+                '}';
+    }
+
     /**
      * ��ȡflightNumber���Ե�ֵ��
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @return possible object is
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public JAXBElement<String> getFlightNumber() {
         return flightNumber;
@@ -74,11 +83,9 @@ public class Ticket {
 
     /**
      * ����flightNumber���Ե�ֵ��
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @param value allowed object is
+     *              {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public void setFlightNumber(JAXBElement<String> value) {
         this.flightNumber = value;
@@ -86,11 +93,9 @@ public class Ticket {
 
     /**
      * ��ȡcompany���Ե�ֵ��
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @return possible object is
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public JAXBElement<String> getCompany() {
         return company;
@@ -98,11 +103,9 @@ public class Ticket {
 
     /**
      * ����company���Ե�ֵ��
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @param value allowed object is
+     *              {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public void setCompany(JAXBElement<String> value) {
         this.company = value;
@@ -110,11 +113,9 @@ public class Ticket {
 
     /**
      * ��ȡdepartureTime���Ե�ֵ��
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @return possible object is
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public JAXBElement<String> getDepartureTime() {
         return departureTime;
@@ -122,11 +123,9 @@ public class Ticket {
 
     /**
      * ����departureTime���Ե�ֵ��
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @param value allowed object is
+     *              {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public void setDepartureTime(JAXBElement<String> value) {
         this.departureTime = value;
@@ -134,11 +133,9 @@ public class Ticket {
 
     /**
      * ��ȡdepartureAirport���Ե�ֵ��
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @return possible object is
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public JAXBElement<String> getDepartureAirport() {
         return departureAirport;
@@ -146,11 +143,9 @@ public class Ticket {
 
     /**
      * ����departureAirport���Ե�ֵ��
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @param value allowed object is
+     *              {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public void setDepartureAirport(JAXBElement<String> value) {
         this.departureAirport = value;
@@ -158,11 +153,9 @@ public class Ticket {
 
     /**
      * ��ȡarrivalTime���Ե�ֵ��
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @return possible object is
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public JAXBElement<String> getArrivalTime() {
         return arrivalTime;
@@ -170,11 +163,9 @@ public class Ticket {
 
     /**
      * ����arrivalTime���Ե�ֵ��
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @param value allowed object is
+     *              {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public void setArrivalTime(JAXBElement<String> value) {
         this.arrivalTime = value;
@@ -182,11 +173,9 @@ public class Ticket {
 
     /**
      * ��ȡarrivalAirport���Ե�ֵ��
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @return possible object is
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public JAXBElement<String> getArrivalAirport() {
         return arrivalAirport;
@@ -194,11 +183,9 @@ public class Ticket {
 
     /**
      * ����arrivalAirport���Ե�ֵ��
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @param value allowed object is
+     *              {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public void setArrivalAirport(JAXBElement<String> value) {
         this.arrivalAirport = value;
@@ -206,11 +193,9 @@ public class Ticket {
 
     /**
      * ��ȡprice���Ե�ֵ��
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @return possible object is
+     * {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public JAXBElement<String> getPrice() {
         return price;
@@ -218,11 +203,9 @@ public class Ticket {
 
     /**
      * ����price���Ե�ֵ��
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
-     *     
+     *
+     * @param value allowed object is
+     *              {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     public void setPrice(JAXBElement<String> value) {
         this.price = value;

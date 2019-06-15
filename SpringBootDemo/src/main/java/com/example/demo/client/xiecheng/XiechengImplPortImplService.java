@@ -15,7 +15,7 @@ import javax.xml.ws.Service;
  *
  */
 @WebServiceClient(name = "XiechengImplPortImplService",
-                  wsdlLocation = "http://localhost:8001/service/XiechengService?wsdl",
+                  wsdlLocation = "http://192.168.1.112:8001/service/XiechengService?wsdl",
                   targetNamespace = "http://a.other.com/")
 public class XiechengImplPortImplService extends Service {
 
@@ -26,7 +26,7 @@ public class XiechengImplPortImplService extends Service {
     static {
         URL url = null;
         try {
-            url = new URL("http://localhost:8001/service/XiechengService?wsdl");
+            url = new URL("http://192.168.1.112:8001/service/XiechengService?wsdl");
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(XiechengImplPortImplService.class.getName())
                 .log(java.util.logging.Level.INFO,
