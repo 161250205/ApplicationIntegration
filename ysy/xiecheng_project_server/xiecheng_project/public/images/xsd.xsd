@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://jw.nju.edu.cn/schema/info"
+        xmlns:tns="http://jw.nju.edu.cn/schema/info"
+        elementFormDefault="qualified">
+
+    <element name="infoList" type="tns:infoListType"/>
+
+    <!--单个航班信息类型-->
+    <complexType name="infoType">
+        <all>
+            <element name="company" type="string"/>
+            <element name="flightNumber" type="string"/>
+            <element name="departureAirport" type="string"/>
+            <element name="arrivalAirport" type="string"/>
+            <element name="departureTime" type="string"/>
+            <element name="arrivalTime" type="string"/>
+            <element name="price" type="int"/>
+        </all>
+    </complexType>
+
+    <complexType name="infoListType">
+        <sequence minOccurs="0" maxOccurs="unbounded">
+            <element name="info" type="tns:infoType"/>
+        </sequence>
+        <attribute name="company" type="string"/>
+    </complexType>
+</schema>

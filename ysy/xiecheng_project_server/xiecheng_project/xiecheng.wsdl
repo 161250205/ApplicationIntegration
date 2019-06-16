@@ -1,0 +1,56 @@
+<definitions name="XiechengImplService" targetNamespace="http://Impl.Service/" xmlns:tns="http://Impl.Service/"
+             xmlns:info="http://jw.nju.edu.cn/schema/info" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2000/10/XMLSchema">
+    <types>
+        <xsd:schema targetNamespace="http://jw.nju.edu.cn/schema/info">
+            <xsd:element name="info" type="info:infoType"/>
+            <xsd:element name="infoList" type="info:infoListType"/>
+            <xsd:complexType name="infoListType">
+                <xsd:sequence>
+                    <xsd:element name="info:info" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="company" type="xsd:string"/>
+            </xsd:complexType>
+            <xsd:complexType name="infoType">
+                <xsd:sequence>
+                    <xsd:element name="company" type="xsd:string" form="qualified" minOccurs="0"/>
+                    <xsd:element name="flightNumber" type="xsd:string" form="qualified" minOccurs="0"/>
+                    <xsd:element name="departureAirport" type="xsd:string" form="qualified" minOccurs="0"/>
+                    <xsd:element name="arrivalAirport" type="xsd:string" form="qualified" minOccurs="0"/>
+                    <xsd:element name="departureTime" type="xsd:string" form="qualified" minOccurs="0"/>
+                    <xsd:element name="arrivalTime" type="xsd:string" form="qualified" minOccurs="0"/>
+                    <xsd:element name="price" type="xsd:int" form="qualified" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+    <message name="getXiechengData"/>
+    <message name="getXiechengDataResponse">
+        <part name="InfoListXml" type="info:infoListType"/>
+    </message>
+    <portType name="Xiecheng">
+        <operation name="getXiechengData">
+            <input xmlns:ns2="http://www.w3.org/2007/05/addressing/metadata"
+                   ns2:Action="http://Service/Xiecheng/getXiechengDataRequest" message="tns:getXiechengData"/>
+            <output xmlns:ns3="http://www.w3.org/2007/05/addressing/metadata"
+                    ns3:Action="http://Service/Xiecheng/getXiechengDataResponse" message="tns:getXiechengDataResponse"/>
+        </operation>
+    </portType>
+    <binding name="XiechengImplPortBinding" type="tns:Xiecheng">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"/>
+        <operation name="getXiechengData">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal" namespace="http://Impl.Service/"/>
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://Impl.Service/"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="XiechengImplService">
+        <port name="XiechengImplPort" binding="tns:XiechengImplPortBinding">
+            <soap:address location="http://localhost:8080/xiecheng/XiechengService"/>
+        </port>
+    </service>
+</definitions>
